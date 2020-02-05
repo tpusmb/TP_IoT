@@ -1,5 +1,7 @@
 from flask import Flask, request, render_template
 
+from utils.arduino_wrapper import ArduinoWrapper
+
 app = Flask(__name__)
 
 
@@ -16,6 +18,7 @@ def hello_world():
 def send_message():
     message = request.form['message']
     print(message)
+    ArduinoWrapper().send_msg(message)
     return message, 200
 
 

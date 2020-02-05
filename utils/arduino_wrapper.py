@@ -1,4 +1,4 @@
-import serial
+from serial import Serial
 
 
 class ArduinoWrapper:
@@ -10,7 +10,7 @@ class ArduinoWrapper:
         self.writeTimeout = writeTimeout
 
     def send_msg(self, message):
-        with serial.Serial(
+        with Serial(
                 port=self.port,
                 baudrate=self.baudrate,
                 timeout=self.timeout,

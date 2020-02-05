@@ -8,10 +8,11 @@ def hello_world():
     return 'Hello World!'
 
 
-@app.route('/sendMsg', methods=['POST'])
+@app.route('/sendMessage', methods=['POST'])
 def add_income():
-    request.get_json()
-    return '', 204
+    message = request.form['message']
+    print(message)
+    return message, 200
 
 
 if __name__ == '__main__':

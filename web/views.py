@@ -1,4 +1,7 @@
 from flask import Flask, request, render_template
+from serial import SerialException
+
+from utils.arduino_wrapper import ArduinoWrapper
 
 app = Flask(__name__)
 
@@ -16,7 +19,11 @@ def hello_world():
 def send_message():
     message = request.form['message']
     print(message)
-    return message, 200
+    try:
+        ArduinoWrapper().send_msg(message)
+        return message, 200
+    except SerialException:
+        return "Arduino seem's to be NOT connected", 500
 
 
 if __name__ == "__main__":
